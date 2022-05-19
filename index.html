@@ -1,0 +1,167 @@
+<html>
+  <head>
+    <style>
+      body {
+        background-color: black;
+      }
+      .draggable {
+        position: absolute;
+        margin: 0rem;
+        padding: 0rem;
+        height: 200px;
+        width: 426px;
+        z-index: 1;
+      }
+      .frame {
+        border: solid 1px white;
+        position: absolute;
+        top: 60px;
+        left: 500px;
+        height: 800px;
+        width: 1278px;
+      }
+      .instruction {
+        position: absolute;
+        top: 200px;
+        left: 800px;
+        color: white;
+        font-family: monospace;
+        font-size: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="frame"></div>
+    <p class="instruction">Drag the pieces to make the picture</p>
+    <img
+      draggable="true"
+      class="draggable"
+      src="images/row-2-column-1.png"
+      id="dragging4"
+      style="left: 0px; top: 0px"
+    />
+    <img
+      draggable="true"
+      class="draggable"
+      src="images/row-1-column-3.png"
+      id="dragging3"
+      style="left: 0px; top: 0px"
+    />
+    <img
+      draggable="true"
+      class="draggable"
+      src="images/row-3-column-3.png"
+      id="dragging3"
+      style="left: 0px; top: 0px"
+    />
+    <img
+      draggable="true"
+      class="draggable"
+      src="images/row-4-column-1.png"
+      id="dragging1"
+      style="left: 0px; top: 0px"
+    />
+    <img
+      draggable="true"
+      class="draggable"
+      src="images/row-1-column-2.png"
+      id="dragging2"
+      style="left: 0px; top: 0px"
+    />
+    <img
+      draggable="true"
+      class="draggable"
+      src="images/row-3-column-1.png"
+      id="dragging1"
+      style="left: 0px; top: 0px"
+    />
+    <img
+      draggable="true"
+      class="draggable"
+      src="images/row-2-column-2.png"
+      id="dragging5"
+      style="left: 0px; top: 0px"
+    />
+    <img
+      draggable="true"
+      class="draggable"
+      src="images/row-2-column-3.png"
+      id="dragging6"
+      style="left: 0px; top: 0px"
+    />
+    <img
+      draggable="true"
+      class="draggable"
+      src="images/row-4-column-2.png"
+      id="dragging2"
+      style="left: 0px; top: 0px"
+    />
+    <img
+      draggable="true"
+      class="draggable"
+      src="images/row-1-column-1.png"
+      id="dragging1"
+      style="left: 0px; top: 0px"
+    />
+    <img
+      draggable="true"
+      class="draggable"
+      src="images/row-3-column-2.png"
+      id="dragging2"
+      style="left: 0px; top: 0px"
+    />
+    <img
+      draggable="true"
+      class="draggable"
+      src="images/row-4-column-3.png"
+      id="dragging3"
+      style="left: 0px; top: 0px"
+    />
+    <script>
+      function dragElement(elmnt) {
+        elmnt.onmousedown = dragMouseDown;
+
+        function dragMouseDown(e) {
+          e = e || window.event;
+          e.preventDefault();
+
+          document.onmouseup = closeDragElement;
+          // call a function whenever the cursor moves:
+          document.onmousemove = elementDrag;
+        }
+
+        function elementDrag(e) {
+          e = e || window.event;
+          e.preventDefault();
+
+          const currentLeft = parseInt(elmnt.style.left.split("px")[0]);
+
+          const changeInLeft = e.movementX;
+
+          const newLeft = currentLeft + changeInLeft;
+
+          elmnt.style.left = newLeft + "px";
+
+          const currentTop = parseInt(elmnt.style.top.split("px")[0]);
+
+          const changeInTop = e.movementY;
+
+          const newTop = currentTop + changeInTop;
+
+          elmnt.style.top = newTop + "px";
+        }
+
+        function closeDragElement() {
+          /* stop moving when mouse button is released:*/
+          document.onmouseup = null;
+          document.onmousemove = null;
+        }
+      }
+
+      const images = document.getElementsByTagName("img");
+      for (let image of images) {
+        dragElement(image);
+      }
+    </script>
+  </body>
+</html>
